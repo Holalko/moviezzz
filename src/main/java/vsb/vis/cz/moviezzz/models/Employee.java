@@ -10,15 +10,22 @@ public class Employee extends Person {
     @OneToMany
     private List<Borrowed> borroweds;
 
-    public Employee(){}
-
     public Employee(List<Borrowed> borroweds) {
         this.borroweds = borroweds;
     }
 
-    public Employee(String name, List<Borrowed> borroweds) {
-        super(name);
+    public Employee(String password, List<Borrowed> borroweds) {
+        super(password);
         this.borroweds = borroweds;
+    }
+
+    public Employee(String name, String password, List<Borrowed> borroweds) {
+        super(name, password);
+        this.borroweds = borroweds;
+    }
+
+    public Employee() {
+        super();
     }
 
     public List<Borrowed> getBorroweds() {

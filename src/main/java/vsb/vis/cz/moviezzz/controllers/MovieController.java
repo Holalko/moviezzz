@@ -44,4 +44,10 @@ public class MovieController {
         movieMapper.update(movie);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/reserve")
+    public Boolean reserveMovie(@RequestParam Long movieId, @RequestParam Long userId){
+        return movieMapper.reserveMovie(movieId, userId);
+    }
+
 }

@@ -25,12 +25,8 @@ public class Movie {
     )
     private List<Category> categories;
 
-    @ManyToMany
-    @JoinTable(name = "movie_reserved_customer",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "customer_id")
-    )
-    private List<Customer> reservedBy;
+    @ManyToOne
+    private Customer reservedBy;
 
     @ManyToMany
     @JoinTable(name = "movie_followed_customer",
@@ -43,6 +39,13 @@ public class Movie {
     private List<Customer> borrowedInHistoryBy;
 
     public Movie() {
+    }
+
+    public Movie(Long id, String name, Integer yearOfRelease, Boolean forAdults){
+        this.id = id;
+        this.name = name;
+        this.yearOfRelease = yearOfRelease;
+        this.forAdults = forAdults;
     }
 
     public Movie(Long id, String name,
@@ -72,11 +75,11 @@ public class Movie {
         this.categories = categories;
     }
 
-    public List<Customer> getReservedBy() {
+    public Customer getReservedBy() {
         return reservedBy;
     }
 
-    public void setReservedBy(List<Customer> reservedBy) {
+    public void setReservedBy(Customer reservedBy) {
         this.reservedBy = reservedBy;
     }
 

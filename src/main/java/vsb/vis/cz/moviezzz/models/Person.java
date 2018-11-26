@@ -11,14 +11,17 @@ public class Person {
     private Long id;
 
     private String name;
+    private String password;
 
+    public Person(){}
 
-
-    public Person() {
+    public Person(String password) {
+        this.password = password;
     }
 
-    public Person(String name) {
+    public Person(String name, String password) {
         this.name = name;
+        this.password = password;
     }
 
     public Long getId() {

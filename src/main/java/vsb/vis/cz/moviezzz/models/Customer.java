@@ -14,11 +14,7 @@ public class Customer extends Person {
     @OneToMany
     private List<Borrowed> borroweds;
 
-    @ManyToMany
-    @JoinTable(name = "movie_reserved_customer",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
+    @OneToMany
     private List<Movie> reservedList;
 
     @ManyToMany
@@ -38,18 +34,40 @@ public class Customer extends Person {
     )
     private List<Category> favoriteCategories;
 
-    public Customer() {
+
+    public Customer(){
+        super();
     }
 
-    public Customer(Integer age) {
+    public Customer(String password, String name) {
+        super(name, password);
+    }
+
+    public Customer(String password, Integer age, Address address, List<Borrowed> borroweds, List<Movie> reservedList, List<Movie> followedList, List<Movie> historyList, List<Category> favoriteCategories) {
+        super(password);
         this.age = age;
+        this.address = address;
+        this.borroweds = borroweds;
+        this.reservedList = reservedList;
+        this.followedList = followedList;
+        this.historyList = historyList;
+        this.favoriteCategories = favoriteCategories;
     }
 
-    public Customer(String name, Integer age) {
-        super(name);
+    public Customer(String name, String password, Integer age, Address address, List<Borrowed> borroweds, List<Movie> reservedList, List<Movie> followedList, List<Movie> historyList, List<Category> favoriteCategories) {
+        super(name, password);
         this.age = age;
+        this.address = address;
+        this.borroweds = borroweds;
+        this.reservedList = reservedList;
+        this.followedList = followedList;
+        this.historyList = historyList;
+        this.favoriteCategories = favoriteCategories;
     }
 
+    public void addToFollowedList(Movie movie){
+        this.followedList.add(movie);
+    }
 
     public Integer getAge() {
         return age;
@@ -58,7 +76,6 @@ public class Customer extends Person {
     public void setAge(Integer age) {
         this.age = age;
     }
-
 
 
     public Address getAddress() {

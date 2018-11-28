@@ -1,5 +1,9 @@
 package vsb.vis.cz.moviezzz.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,9 +16,11 @@ public class Customer extends Person {
     private Address address;
 
     @OneToMany
+    @JsonBackReference
     private List<Borrowed> borroweds;
 
     @OneToMany
+    @JsonBackReference
     private List<Movie> reservedList;
 
     @ManyToMany
@@ -22,6 +28,7 @@ public class Customer extends Person {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
+    @JsonBackReference
     private List<Movie> followedList;
 
     @Transient
@@ -32,6 +39,7 @@ public class Customer extends Person {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+    @JsonBackReference
     private List<Category> favoriteCategories;
 
 

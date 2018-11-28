@@ -1,6 +1,11 @@
 package vsb.vis.cz.moviezzz.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -16,6 +21,7 @@ public class Movie {
     private Double price;
 
     @OneToOne
+    @JsonManagedReference
     private Borrowed borrowed;
 
     @ManyToMany
@@ -23,6 +29,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+    @JsonManagedReference
     private List<Category> categories;
 
     @ManyToOne
@@ -33,6 +40,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "customer_id")
     )
+    @JsonManagedReference
     private List<Customer> followedBy;
 
     @Transient
@@ -46,6 +54,15 @@ public class Movie {
         this.name = name;
         this.yearOfRelease = yearOfRelease;
         this.forAdults = forAdults;
+    }
+
+    public Movie(Long id, String name, Integer yearOfRelease, Boolean forAdults, String description, Double price){
+        this.id = id;
+        this.name = name;
+        this.yearOfRelease = yearOfRelease;
+        this.forAdults = forAdults;
+        this.description = description;
+        this.price = price;
     }
 
     public Movie(Long id, String name,

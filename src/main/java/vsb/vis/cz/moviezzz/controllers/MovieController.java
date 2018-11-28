@@ -50,4 +50,28 @@ public class MovieController {
         return movieMapper.reserveMovie(movieId, userId);
     }
 
+    /**
+     *
+     * @param id of user
+     * @return
+     */
+    @GetMapping("/user/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Movie> findUsersMovies(@PathVariable Long id){
+        return movieMapper.findBorrowedMoviesBy(id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/find-by-name")
+    public List<Movie> findByName(@RequestParam String name){
+        return movieMapper.findByName(name);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/extend-reservation/{movieId}")
+    public Boolean extendReservation(@PathVariable Long movieId){
+        return movieMapper.extendReservation(movieId);
+    }
+
+
 }

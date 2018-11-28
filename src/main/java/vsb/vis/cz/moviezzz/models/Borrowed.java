@@ -1,5 +1,8 @@
 package vsb.vis.cz.moviezzz.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -13,12 +16,15 @@ public class Borrowed {
     private LocalDate dueDate;
 
     @OneToOne
+    @JsonBackReference
     private Movie movie;
 
     @ManyToOne
+    @JsonBackReference
     private Customer customer;
 
     @ManyToOne
+    @JsonBackReference
     private Employee employee;
 
     public Borrowed() {

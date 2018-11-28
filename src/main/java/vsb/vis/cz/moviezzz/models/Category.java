@@ -1,5 +1,8 @@
 package vsb.vis.cz.moviezzz.models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,6 +16,7 @@ public class Category {
     private String name;
 
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Movie> movies;
 
 

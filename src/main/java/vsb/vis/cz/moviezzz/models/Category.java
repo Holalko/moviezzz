@@ -1,7 +1,6 @@
 package vsb.vis.cz.moviezzz.models;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,9 +15,12 @@ public class Category {
     private String name;
 
     @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonManagedReference(value = "movie-category")
     private List<Movie> movies;
 
+    @ManyToMany
+    @JsonManagedReference(value = "customer-favorite-category")
+    private List<Customer> customers;
 
     public Category() {
     }
@@ -26,6 +28,22 @@ public class Category {
     public Category(String name) {
 
         this.name = name;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 
     public Long getId() {

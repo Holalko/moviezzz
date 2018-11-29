@@ -16,15 +16,15 @@ public class Borrowed {
     private LocalDate dueDate;
 
     @OneToOne
-    @JsonBackReference
+    @JsonBackReference(value = "movie-borrowed")
     private Movie movie;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "customer-borrowed")
     private Customer customer;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "employee-borrowed")
     private Employee employee;
 
     public Borrowed() {

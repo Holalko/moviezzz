@@ -20,6 +20,12 @@ public class LoginController {
     }
 
 
+    /**
+     *
+     * @param loginModel {email, password}
+     * @return id of logged user
+     * @throws NotFoundException if could not find user specified
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public Long login(@RequestBody LoginModel loginModel) throws NotFoundException {

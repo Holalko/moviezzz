@@ -4,6 +4,7 @@ import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vsb.vis.cz.moviezzz.models.Customer;
+import vsb.vis.cz.moviezzz.models.Employee;
 import vsb.vis.cz.moviezzz.models.LoginModel;
 
 import javax.persistence.EntityManager;
@@ -39,8 +40,14 @@ public class CustomerMapper {
         List<Customer> user = em.createQuery("SELECT a FROM Customer a WHERE a.name = :email AND a.password = :password", Customer.class)
                 .setParameter("email", loginModel.getEmail())
                 .setParameter("password", loginModel.getPassword()).getResultList();
-        if(user.isEmpty()){
-            throw new NotFoundException("Could not log in");
+        if (user.isEmpty()) {
+            List<Employee> employees = em.createQuery("SELECT e FROM Employee e WHERE e.name = :email AND e.password = :password", Employee.class)
+                    .setParameter("email", loginModel.getEmail())
+                    .setParameter("password", loginModel.getPassword()).getResultList();
+            if(employees.isEmpty()){
+                throw new NotFoundException("Could not log in");
+            }
+            return employees.get(0).getId();
         }
         return user.get(0).getId();
     }

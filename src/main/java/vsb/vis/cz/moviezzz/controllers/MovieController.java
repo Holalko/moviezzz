@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import vsb.vis.cz.moviezzz.mappers.MovieMapper;
 import vsb.vis.cz.moviezzz.models.Movie;
+import vsb.vis.cz.moviezzz.models.dtos.MovieDTO;
 
 import java.util.List;
 
@@ -34,8 +35,14 @@ public class MovieController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void saveMovie(@RequestParam Movie movie) {
-        movieMapper.insert(movie);
+    public Long saveMovie(@RequestBody MovieDTO movie) {
+       return movieMapper.insert(movie);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/rewrite")
+    public Long rewriteMovie(@RequestBody MovieDTO movie) {
+        return movieMapper.rewrite(movie);
     }
 
     @ResponseStatus(HttpStatus.OK)

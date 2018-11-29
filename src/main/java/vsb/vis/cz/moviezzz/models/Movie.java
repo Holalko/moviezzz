@@ -1,18 +1,15 @@
 package vsb.vis.cz.moviezzz.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     private String description;
@@ -21,7 +18,7 @@ public class Movie {
     private Double price;
 
     @OneToOne
-    @JsonManagedReference
+    @JsonManagedReference(value = "movie-borrowed")
     private Borrowed borrowed;
 
     @ManyToMany
@@ -29,10 +26,11 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    @JsonManagedReference
+    @JsonManagedReference(value = "movie-category")
     private List<Category> categories;
 
     @ManyToOne
+    @JsonManagedReference(value = "customer-reserved")
     private Customer reservedBy;
 
     @ManyToMany
@@ -40,7 +38,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "customer_id")
     )
-    @JsonManagedReference
+    @JsonManagedReference(value = "customer-followedBy")
     private List<Customer> followedBy;
 
     @Transient
@@ -74,46 +72,6 @@ public class Movie {
         this.forAdults = forAdults;
         this.price = price;
         this.borrowed = borrowed;
-    }
-
-    public Borrowed getBorrowed() {
-        return borrowed;
-    }
-
-    public void setBorrowed(Borrowed borrowed) {
-        this.borrowed = borrowed;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public Customer getReservedBy() {
-        return reservedBy;
-    }
-
-    public void setReservedBy(Customer reservedBy) {
-        this.reservedBy = reservedBy;
-    }
-
-    public List<Customer> getFollowedBy() {
-        return followedBy;
-    }
-
-    public void setFollowedBy(List<Customer> followedBy) {
-        this.followedBy = followedBy;
-    }
-
-    public List<Customer> getBorrowedInHistoryBy() {
-        return borrowedInHistoryBy;
-    }
-
-    public void setBorrowedInHistoryBy(List<Customer> borrowedInHistoryBy) {
-        this.borrowedInHistoryBy = borrowedInHistoryBy;
     }
 
     public Long getId() {
@@ -162,5 +120,45 @@ public class Movie {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Borrowed getBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(Borrowed borrowed) {
+        this.borrowed = borrowed;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public Customer getReservedBy() {
+        return reservedBy;
+    }
+
+    public void setReservedBy(Customer reservedBy) {
+        this.reservedBy = reservedBy;
+    }
+
+    public List<Customer> getFollowedBy() {
+        return followedBy;
+    }
+
+    public void setFollowedBy(List<Customer> followedBy) {
+        this.followedBy = followedBy;
+    }
+
+    public List<Customer> getBorrowedInHistoryBy() {
+        return borrowedInHistoryBy;
+    }
+
+    public void setBorrowedInHistoryBy(List<Customer> borrowedInHistoryBy) {
+        this.borrowedInHistoryBy = borrowedInHistoryBy;
     }
 }

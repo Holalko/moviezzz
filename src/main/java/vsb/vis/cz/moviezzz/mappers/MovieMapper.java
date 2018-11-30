@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.List;
 
+// TODO Data mapper
 @Service
 public class MovieMapper {
 
@@ -106,15 +107,11 @@ public class MovieMapper {
 
     }
 
-    @SuppressWarnings("unchecked")
     public List<Movie> findBorrowedMoviesBy(Long customerId) {
         return em.createQuery("" +
-                "SELECT m.id as id, m.name as name, " +
-                "m.yearOfRelease as yearOfRelease, " +
-                "m.forAdults as forAdults, " +
-                "m.borrowed.dueDate as dueDate " +
+                "SELECT  m " +
                 "FROM Movie m " +
-                "WHERE m.borrowed.customer.id = :customerId")
+                "WHERE m.borrowed.customer.id = :customerId", Movie.class)
                 .setParameter("customerId", customerId)
                 .getResultList();
     }
@@ -149,5 +146,24 @@ public class MovieMapper {
         m.setId(byName.getId());
         update(m);
         return m.getId();
+    }
+
+    public List<Movie> findFollowedMoviesBy(Long id) {
+        return em.createQuery("" +
+                "SELECT  m " +
+                "FROM Movie m " +
+                "JOIN m.followedBy f " +
+                "WHERE f.id = :customerId", Movie.class)
+                .setParameter("customerId", id)
+                .getResultList();
+    }
+
+    public List<Movie> findReservedMoviesBy(Long id) {
+        return em.createQuery("" +
+                "SELECT  m " +
+                "FROM Movie m " +
+                "WHERE m.reservedBy.id = :customerId", Movie.class)
+                .setParameter("customerId", id)
+                .getResultList();
     }
 }

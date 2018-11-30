@@ -2,6 +2,7 @@ package vsb.vis.cz.moviezzz.models;
 
 import javax.persistence.*;
 
+// TODO CONCRETE TABLE INHERITANE
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person {
@@ -11,17 +12,11 @@ public class Person {
     private Long id;
 
     private String name;
-    private String password;
 
     public Person(){}
 
-    public Person(String password) {
-        this.password = password;
-    }
-
-    public Person(String name, String password) {
+    public Person(String name) {
         this.name = name;
-        this.password = password;
     }
 
     public Long getId() {

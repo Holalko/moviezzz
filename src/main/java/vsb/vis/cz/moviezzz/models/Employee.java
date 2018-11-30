@@ -13,17 +13,13 @@ public class Employee extends Person {
     @JsonManagedReference(value = "employee-borrowed")
     private List<Borrowed> borroweds;
 
+
     public Employee(List<Borrowed> borroweds) {
         this.borroweds = borroweds;
     }
 
-    public Employee(String password, List<Borrowed> borroweds) {
-        super(password);
-        this.borroweds = borroweds;
-    }
-
-    public Employee(String name, String password, List<Borrowed> borroweds) {
-        super(name, password);
+    public Employee(String name, List<Borrowed> borroweds) {
+        super(name);
         this.borroweds = borroweds;
     }
 

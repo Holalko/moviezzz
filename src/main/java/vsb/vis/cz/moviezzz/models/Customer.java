@@ -45,12 +45,12 @@ public class Customer extends Person {
         super();
     }
 
-    public Customer(String password, String name) {
-        super(name, password);
+    public Customer(String name) {
+        super(name);
     }
 
-    public Customer(String password, Integer age, Address address, List<Borrowed> borroweds, List<Movie> reservedList, List<Movie> followedList, List<Movie> historyList, List<Category> favoriteCategories) {
-        super(password);
+    public Customer(Integer age, Address address, List<Borrowed> borroweds, List<Movie> reservedList, List<Movie> followedList, List<Movie> historyList, List<Category> favoriteCategories) {
+        super();
         this.age = age;
         this.address = address;
         this.borroweds = borroweds;
@@ -60,8 +60,8 @@ public class Customer extends Person {
         this.favoriteCategories = favoriteCategories;
     }
 
-    public Customer(String name, String password, Integer age, Address address, List<Borrowed> borroweds, List<Movie> reservedList, List<Movie> followedList, List<Movie> historyList, List<Category> favoriteCategories) {
-        super(name, password);
+    public Customer(String name, Integer age, Address address, List<Borrowed> borroweds, List<Movie> reservedList, List<Movie> followedList, List<Movie> historyList, List<Category> favoriteCategories) {
+        super(name);
         this.age = age;
         this.address = address;
         this.borroweds = borroweds;

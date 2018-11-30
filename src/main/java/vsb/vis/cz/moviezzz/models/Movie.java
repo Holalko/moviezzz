@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 public class Movie {
 
+    // TODO Identity field
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;

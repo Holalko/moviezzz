@@ -1,5 +1,7 @@
 package vsb.vis.cz.moviezzz.models.dtos;
 
+
+// TODO DTO pattern
 public class MovieDTO {
 
     private Long id;

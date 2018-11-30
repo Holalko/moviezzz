@@ -33,6 +33,11 @@ public class MovieController {
         return movieMapper.findAll();
     }
 
+    /**
+     *
+     * @param movie
+     * @return id when created, -1 when already in db
+     */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Long saveMovie(@RequestBody MovieDTO movie) {
@@ -66,6 +71,18 @@ public class MovieController {
     @ResponseStatus(HttpStatus.OK)
     public List<Movie> findUsersMovies(@PathVariable Long id){
         return movieMapper.findBorrowedMoviesBy(id);
+    }
+
+    @GetMapping("/user/{id}/reserved")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Movie> findUsersMoviesReserved(@PathVariable Long id){
+        return movieMapper.findReservedMoviesBy(id);
+    }
+
+    @GetMapping("/user/{id}/following")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Movie> findUsersMoviesFollowing(@PathVariable Long id){
+        return movieMapper.findFollowedMoviesBy(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
